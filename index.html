@@ -3,95 +3,82 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Ретро-Портал 2003–2012 — RUS Retro</title>
+  <title>RUS Retro Portal 2003–2012 — RUNET HOME</title>
   <style>
-    /* Общее оформление в стиле 2000-х: кислотные градиенты, рамки, blink, marquee */
-    body{font-family: Tahoma, Arial, sans-serif;background:linear-gradient(180deg,#001030,#02102a);color:#111;margin:0;padding:0;}
-    /* фон со звёздами */
-    body::before{content:"";position:fixed;inset:0;background-image:radial-gradient(#fff, rgba(255,255,255,0.05) 2px, transparent 2px);background-size:6px 6px;opacity:.06;pointer-events:none}
-
-    table.layout{width:100%;border-collapse:collapse}
-    .page{width:980px;margin:14px auto;border:6px ridge #c8e0ff;background:linear-gradient(#fff,#eef6ff);padding:8px}
-
-    /* Верхняя шапка */
-    .header{display:block;padding:8px;background:linear-gradient(90deg,#ff99cc,#99ccff);border:3px outset #fff}
-    h1{margin:0;font-size:28px;color:#112;text-shadow:1px 1px 0 #fff}
-
-    /* Левая колонка — гостевая книга и отзывы */
-    .left{width:220px;vertical-align:top;padding:8px}
-    .right{width:200px;vertical-align:top;padding:8px}
-    .center{vertical-align:top;padding:8px}
-
-    .box{background:#fff;border:2px solid #999;padding:8px;margin-bottom:8px}
-    .bevel{box-shadow:inset 2px 2px 0 rgba(255,255,255,.7), inset -2px -2px 0 rgba(0,0,0,.06)}
-
-    /* old-school buttons */
+    /* Обширный ретро-стиль (acid gradients, bevels, GIF vibe) */
+    :root{--accent1:#ff0080;--accent2:#ffd500;--accent3:#00e6ff}
+    body{font-family:Tahoma, Verdana, Arial, sans-serif;margin:0;background:#001; color:#111;}
+    .page{width:1000px;margin:12px auto;border:6px ridge #cfe;background:linear-gradient(#fff,#eef6ff);position:relative}
+    .header{padding:8px;background:linear-gradient(90deg,var(--accent1),var(--accent2));border-bottom:4px inset #fff;position:relative}
+    h1{margin:0;color:#012;font-size:28px;text-shadow:1px 1px 0 #fff}
+    .top-tools{position:absolute;right:10px;top:12px}
     .btn{display:inline-block;padding:6px 10px;background:linear-gradient(#fff,#ddd);border:2px solid #aaa;font-weight:bold;cursor:pointer;margin:4px}
+    .bevel{box-shadow:inset 2px 2px 0 rgba(255,255,255,.8), inset -2px -2px 0 rgba(0,0,0,.08)}
+    table.layout{width:100%;border-collapse:collapse}
+    td.left{width:240px;vertical-align:top;padding:8px}
+    td.center{vertical-align:top;padding:8px}
+    td.right{width:220px;vertical-align:top;padding:8px}
 
-    /* marquee and blink */
-    marquee {background:#fffbcc;border:2px solid #f0e68c;padding:4px}
-    blink{animation:blink 1s steps(1,start) infinite}
-    @keyframes blink{50%{opacity:0}}
-
-    /* GIF-like flashing banner */
-    .gif-banner{height:60px;width:468px;border:2px solid #000;background:linear-gradient(90deg,#ff0,#f00);animation:flash 0.7s steps(2,infinite)}
+    .box{background:#fff;border:2px solid #999;padding:8px;margin-bottom:10px}
+    .gif-banner{height:60px;width:468px;border:2px solid #000;background:linear-gradient(90deg,#ff0,#f00);animation:flash 0.65s steps(2) infinite}
     @keyframes flash{50%{opacity:.3}}
 
-    /* rotating 3D text */
-    .rot3d{display:inline-block;padding:6px 10px;font-weight:bold;color:#fff;text-shadow:1px 1px 0 #000;transform-style:preserve-3d;animation:rot 6s linear infinite}
-    @keyframes rot{0%{transform:rotateY(0)}50%{transform:rotateY(180deg)}100%{transform:rotateY(360deg)}}
+    marquee{background:#fffbcc;border:2px solid #f0e68c;padding:4px}
+    blink{animation:blink .9s steps(1,start) infinite}
+    @keyframes blink{50%{opacity:0}}
 
-    /* visitor counter */
-    .counter{font-weight:bold;color:#b00}
+    /* CRT effect */
+    .crt::after{content:'';position:absolute;left:0;top:0;right:0;bottom:0;pointer-events:none; background-image:linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px); background-size:100% 3px; mix-blend-mode:overlay}
+    .logo-glitch{display:inline-block;position:relative}
+    .logo-glitch::after{content:'';position:absolute;left:2px;top:1px;right:0;bottom:0;background:rgba(255,0,0,0.04);mix-blend-mode:screen;pointer-events:none}
 
-    /* articles */
-    .article{border:2px dotted #444;padding:10px;background:#fff;margin-bottom:12px}
-    .meta{font-size:12px;color:#666}
-    .avatar{width:100px;height:100px;border:2px solid #000;display:inline-block;background:#eee;margin-right:8px;vertical-align:top}
-
-    /* comments */
-    .comment{background:#f4f4f4;border:1px solid #bbb;padding:6px;margin:6px 0}
-    .comment .actions{font-size:12px;color:#666}
-    .nested{margin-left:20px}
-
-    /* popup ads */
-    .ad{position:fixed;z-index:9999;border:3px outset #ffe;padding:8px;background:linear-gradient(#fff,#ffd);box-shadow:4px 4px 0 rgba(0,0,0,.3)}
+    /* popup ad */
+    .ad{position:fixed;z-index:9999;border:3px outset #fff;padding:8px;background:linear-gradient(#fff,#ffd);box-shadow:6px 6px 0 rgba(0,0,0,.4)}
     .ad .close{float:right;background:#c33;color:#fff;border:none;padding:2px 6px;cursor:pointer}
 
-    /* snow/stars */
-    .star{position:fixed;width:6px;height:6px;background:rgba(255,255,255,.9);border-radius:50%;opacity:.9}
+    /* modal overlay */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9998;display:flex;align-items:center;justify-content:center}
+    .modal{background:#fff;border:4px outset #eee;padding:12px;width:420px;}
+    .modal .title{font-weight:bold;margin-bottom:6px}
 
-    /* cursor trail */
+    /* starfall */
+    .star{position:fixed;width:6px;height:6px;background:rgba(255,255,255,0.9);border-radius:50%;opacity:.9}
+
+    /* trail cursor */
     .trail{position:fixed;width:8px;height:8px;border-radius:50%;pointer-events:none;opacity:.6}
 
-    /* footer */
-    footer{padding:8px;background:linear-gradient(90deg,#ddf,#cce);border-top:3px solid #aac;margin-top:12px}
+    /* small oldschool styles */
+    .avatar{width:100px;height:100px;border:2px solid #000;background:#eee;display:inline-block;vertical-align:top;margin-right:8px}
+    .article{border:2px dotted #444;padding:10px;background:#fff;margin-bottom:12px}
+    .meta{font-size:12px;color:#666}
+    .comment{background:#f4f4f4;border:1px solid #bbb;padding:6px;margin:6px 0}
+    .nested{margin-left:20px}
 
-    /* small retro icons */
-    .icon{width:16px;height:16px;display:inline-block;background:#000;margin-right:4px}
+    .footer{padding:8px;background:linear-gradient(90deg,#ddf,#cce);border-top:3px solid #aac;margin-top:12px}
 
-    /* chat box */
-    .chat{height:180px;overflow:auto;background:#fff;border:2px solid #999;padding:6px}
+    .retro-off *[data-retro]{display:none}
 
-    /* NEW badge */
-    .new{color:#fff;background:#e11;padding:2px 6px;animation:blink 1s steps(1) infinite}
-
-    /* ensure old feel: table-based layout fallback */
-    @media(max-width:1000px){ .page{width:98%} }
+    /* responsive fallback */
+    @media(max-width:1000px){ .page{width:98%} td.left, td.right{display:none} }
   </style>
+  <link id="favlink" rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ctext y='14' font-size='14'%3E%F0%9F%8E%8A%3C/text%3E%3C/svg%3E">
 </head>
-<body>
-  <div class="page">
+<body class="crt">
+  <div class="page" id="pageRoot">
     <div class="header bevel">
       <table style="width:100%"><tr>
-        <td style="width:120px"><div style="width:100px;height:80px;background:#fff;border:2px solid #000;display:flex;align-items:center;justify-content:center">LOGO</div></td>
+        <td style="width:140px"><div class="logo-glitch" style="width:120px;height:80px;background:#fff;border:2px solid #000;display:flex;align-items:center;justify-content:center">LOGO</div></td>
         <td>
-          <h1>RUS Retro Portal <span style="font-size:12px;color:#333">1998–2015</span></h1>
-          <div><marquee scrollamount="6">Реклама: Скачай бесплатно! &nbsp;|&nbsp; Добавь в избранное &nbsp;|&nbsp; Рекомендуем Internet Explorer 6</marquee></div>
+          <h1>RUS Retro Portal <small style="font-size:12px;color:#333">1998–2015 — Домашняя страница</small></h1>
+          <div style="margin-top:6px"><marquee scrollamount="6">Реклама: Скачай набор смайликов • Добавь в избранное • Рекомендуем Internet Explorer</marquee></div>
         </td>
-        <td style="width:220px;text-align:right">
-          <div class="rot3d">ЛУЧШИЙ САЙТ 2007</div>
-          <div class="counter" id="visitorCounter">Просетителей: —</div>
+        <td style="width:260px;text-align:right;vertical-align:top">
+          <div class="top-tools">
+            <button class="btn" id="retroToggle">Ретро-режим: Вкл</button>
+            <button class="btn" id="muteMusic">Музыка: Вкл</button>
+            <button class="btn" id="clearAdsBtn">Очистить рекламу</button>
+          </div>
+          <div style="margin-top:6px;font-size:12px" id="hitCounter">Ты — посетитель: 0</div>
         </td>
       </tr></table>
     </div>
@@ -99,32 +86,26 @@
     <table class="layout"><tr>
       <td class="left">
         <div class="box">
-          <h3>Гостевая книга <span class="new">NEW!</span></h3>
+          <h3>Гостевая книга <span style="color:#fff;background:#c00;padding:2px 6px;border-radius:3px">NEW</span></h3>
           <div id="guestbookEntries"></div>
           <hr>
           <input id="gbName" placeholder="Ваш ник" style="width:100%"><br>
           <textarea id="gbText" rows="3" style="width:100%" placeholder="Оставьте запись..."></textarea><br>
-          <button class="btn" id="gbAdd">Добавить в гостевую книгу</button>
+          <div>Капча: сколько будет 2+3? <input id="gbCaptcha" style="width:40px"></div>
+          <button class="btn" id="gbAdd">Добавить</button>
         </div>
 
         <div class="box">
-          <h3>Опрос: Какой у вас интернет?</h3>
-          <form id="poll">
-            <label><input type="radio" name="net" value="Dial-Up"> Dial-Up</label><br>
-            <label><input type="radio" name="net" value="ADSL"> ADSL</label><br>
-            <label><input type="radio" name="net" value="3G"> 3G</label><br>
-            <label><input type="radio" name="net" value="Не знаю"> Не знаю</label><br>
-            <button class="btn" type="button" id="voteBtn">Голосовать</button>
-          </form>
-          <div id="pollResult" style="margin-top:8px;font-size:12px;color:#333"></div>
+          <h3>Последние 50 ссылок</h3>
+          <div id="linksList" style="font-size:13px;line-height:1.4"></div>
         </div>
 
         <div class="box">
           <h3>Наши баннеры 88x31</h3>
           <div style="display:flex;flex-wrap:wrap;gap:6px">
-            <div style="width:88px;height:31px;background:#ff0;border:1px solid #000;text-align:center;line-height:31px">Баннер</div>
-            <div style="width:88px;height:31px;background:#f0f;border:1px solid #000;text-align:center;line-height:31px">Баннер</div>
-            <div style="width:88px;height:31px;background:#0ff;border:1px solid #000;text-align:center;line-height:31px">Баннер</div>
+            <div style="width:88px;height:31px;background:#ff0;border:1px solid #000;text-align:center;line-height:31px">88x31</div>
+            <div style="width:88px;height:31px;background:#f0f;border:1px solid #000;text-align:center;line-height:31px">88x31</div>
+            <div style="width:88px;height:31px;background:#0ff;border:1px solid #000;text-align:center;line-height:31px">88x31</div>
           </div>
         </div>
 
@@ -137,30 +118,29 @@
             <div>
               <button class="btn" onclick="addToFavorites()">Добавить в избранное</button>
               <button class="btn" onclick="setHomepage()">Сделать стартовой</button>
-              <button class="btn" id="downloadBtn">Скачать бесплатно (2.3 МБ)</button>
             </div>
           </div>
         </div>
 
         <div class="box">
           <h2>Статьи пользователей</h2>
-
-          <div id="articlesArea">
-            <!-- статьи будут подгружены JS -->
-          </div>
-
+          <div id="articlesArea"></div>
         </div>
 
         <div class="box">
-          <h3>Форум</h3>
-          <p>Старые темы: <a href="#">Где скачать альфу Minecraft</a> | <a href="#">Лучшие сервера CS 1.6</a></p>
-          <button class="btn" onclick="openForum()">Перейти в форум</button>
+          <h3>Рейтинг дня</h3>
+          <div id="ratingOfDay"></div>
         </div>
 
         <div class="box">
-          <h3>Чат онлайн</h3>
-          <div class="chat" id="chatBox"></div>
-          <input id="chatNick" placeholder="Ник" style="width:30%"><input id="chatMsg" placeholder="Сообщение" style="width:58%"><button class="btn" id="sendChat">Отправить</button>
+          <h3>Истории-письма</h3>
+          <div id="lettersArea"></div>
+        </div>
+
+        <div class="box">
+          <h3>Shoutbox</h3>
+          <div id="shoutbox" style="height:120px;overflow:auto;background:#fff;padding:6px"></div>
+          <input id="shNick" placeholder="Ник" style="width:22%"><input id="shMsg" placeholder="Сообщение" style="width:60%"><button class="btn" id="shSend">Отправить</button>
         </div>
 
       </td>
@@ -168,169 +148,206 @@
       <td class="right">
         <div class="box">
           <h3>Реклама</h3>
-          <button class="btn" onclick="spawnAd('Вы 999 999 посетитель! Заберите приз!')">Реклама: приз</button>
+          <button class="btn" onclick="spawnAd('Вы 999 999 посетитель! Заберите приз!')">Приз</button>
           <button class="btn" onclick="spawnAd('Скачай бесплатно без регистрации!')">Скачать</button>
-          <button class="btn" onclick="spawnAd('Установите новый браузер!')">Браузер</button>
+          <button class="btn" onclick="spawnAd('Ваш компьютер может быть заражён!')">Вирус</button>
         </div>
 
         <div class="box">
-          <h3>Топ 100 сайтов</h3>
-          <ol style="margin:6px 0;padding-left:18px">
-            <li>Лучший сайт 2007</li>
-            <li>Форумов.net</li>
-            <li>Ретро-мир</li>
-          </ol>
+          <h3>Чат онлайн</h3>
+          <div id="chatBox" style="height:160px;overflow:auto;background:#fff;padding:6px"></div>
+          <input id="chatNick" placeholder="Ник" style="width:30%"><input id="chatMsg" placeholder="Сообщение" style="width:58%"><button class="btn" id="sendChat">Отправить</button>
         </div>
 
         <div class="box">
-          <h3>Счетчик времени на сайте</h3>
-          <div id="timeOnSite">0s</div>
-          <h3>Просмотров этой страницы: <span id="pageViews">0</span></h3>
+          <h3>Файлы</h3>
+          <button class="btn" id="downloadBtn">Скачать бесплатно (2.3 МБ)</button>
         </div>
 
       </td>
     </tr></table>
 
-    <footer>
-      © 2003–2012 Все права защищены | Сайт оптимизирован под 1024x768 | Лучше всего просматривать в Internet Explorer<br>
-      <span>e-mail: admin[at]retro.example</span>
+    <footer class="footer">
+      © 2003–2012 Все права защищены | Сайт оптимизирован под 1024x768 | Лучше всего просматривать в Internet Explorer | admin[at]retro.example
     </footer>
+
   </div>
 
-  <audio id="bgm" loop>
-    <!-- попытка воспроизвести MIDI/фоновую музыку; большинство браузеров блокируют автоплей звука -->
+  <!-- место для динамически создаваемых элементов -->
+  <div id="dynamicRoot"></div>
+
+  <audio id="bgm" loop preload="auto">
     <source src="background.mid" type="audio/midi">
   </audio>
 
   <script>
-    /* ----------------------- УТИЛИТЫ И ИНИЦИАЛИЗАЦИЯ ----------------------- */
-    // Play simple beep using WebAudio (fallback если MIDI не доступен)
-    let audioCtx;
-    function playBeep(){ try{ if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.type='sine'; o.frequency.value=880; o.connect(g); g.connect(audioCtx.destination); o.start(); g.gain.setValueAtTime(0.1, audioCtx.currentTime); g.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime+0.5); setTimeout(()=>o.stop(),600);}catch(e){console.warn(e);} }
+    // ---------------------- Полезные переменные ----------------------
+    let retroEnabled = true;
+    const dynamic = document.getElementById('dynamicRoot');
 
-    // Attempt to autoplay bg music; if blocked, wait for first click
-    function tryPlayBgm(){ const bgm = document.getElementById('bgm'); if(!bgm) return; const p = bgm.play(); if(p && p.catch) p.catch(()=>{document.addEventListener('click', ()=>{ bgm.play().catch(()=>{}); }, {once:true})}); }
-    tryPlayBgm();
+    // ---------------------- Hit counter ----------------------
+    (function(){ const key='global_hits'; let h = parseInt(localStorage.getItem(key)||'10234'); if(!localStorage.getItem('visited_once')){ h += Math.floor(Math.random()*5)+1; localStorage.setItem(key,h); localStorage.setItem('visited_once','1'); } document.getElementById('hitCounter').textContent = 'Ты — посетитель: ' + h; })();
 
-    // Visitor counter (local simulated counter)
-    (function(){ let cnt = parseInt(localStorage.getItem('site_global_counter')||'982345'); if(!localStorage.getItem('visited_once')){ cnt = cnt + Math.floor(Math.random()*7)+1; localStorage.setItem('site_global_counter', cnt); localStorage.setItem('visited_once','1'); } document.getElementById('visitorCounter').textContent = 'Посетителей: ' + cnt; // show
-    })();
+    // ---------------------- Articles: many short posts (30) and letters (10) ----------------------
+    const nickPool = ['NikS_2004','OlgaHome','Admin','Dimon_2005','KiberKot','XP_master','Nastya_Online','GamerPro2008','Lena90','Rusik','ProstoVanya','AnyaS','SergeyFS','IgorNet','MishaZ','Kate1999','Dronik','Maximus','Zheka','Pasha','Vova','Svetlana','OlegK','Yura','Darya','Tanya','Roman','Slava','Vitek','Nika'];
 
-    // Page views per-page
-    (function(){ const key='views_'+location.pathname; let v = parseInt(localStorage.getItem(key)||'0'); v++; localStorage.setItem(key, v); document.getElementById('pageViews').textContent = v; })();
-
-    // Time on page
-    let t0 = Date.now(); setInterval(()=>{ const s = Math.floor((Date.now()-t0)/1000); document.getElementById('timeOnSite').textContent = s + 's'; },1000);
-
-    // Background color change every 10s
-    setInterval(()=>{ document.body.style.background = 'linear-gradient(180deg,'+randomColor()+','+randomColor()+')'; },10000);
-    function randomColor(){ return '#'+Math.floor(Math.random()*16777215).toString(16); }
-
-    // Cursor trail
-    document.addEventListener('mousemove', e=>{ const d=document.createElement('div'); d.className='trail'; d.style.left=(e.clientX-4)+'px'; d.style.top=(e.clientY-4)+'px'; d.style.background = randomColor(); d.style.width = Math.random()*10+4+'px'; d.style.height = d.style.width; document.body.appendChild(d); setTimeout(()=>d.remove(),700); });
-
-    // Falling stars/snow
-    function spawnStar(){ const s=document.createElement('div'); s.className='star'; s.style.left=Math.random()*window.innerWidth+'px'; s.style.top='-10px'; s.style.opacity=Math.random(); s.style.width=(Math.random()*4+2)+'px'; s.style.height=s.style.width; document.body.appendChild(s); const speed = 2+Math.random()*4; let y = -10; const id = setInterval(()=>{ y+=speed; s.style.top = y+'px'; if(y>window.innerHeight+20){ clearInterval(id); s.remove(); }},30);} setInterval(spawnStar,300);
-
-    // Before unload popup (modern browsers show default message)
-    window.addEventListener('beforeunload', function (e) { e.preventDefault(); e.returnValue = ''; });
-
-    // Sound on click
-    document.addEventListener('click', ()=>{ playBeep(); });
-
-    // Random ad spawner
-    const adPool = [
-      'Вы 999 999 посетитель! Заберите приз!',
-      'Скачай бесплатно без регистрации!',
-      'Установите новый браузер!',
-      'Вам письмо!',
-      'Ваш компьютер может быть заражён!'
+    const shortPosts = [];
+    const shortTexts = [
+      'ЛОЛ, зашёл на форум и ржу. Кто бы мог подумать!',
+      'Кто помнит Winamp и эти обложки? БОМБЕЗНО.',
+      'Скачал mp3 через eMule, скорость ужас, но песни нашёл :)',
+      'У кого ещё кнопочный телефон? Ностальгия!',
+      'Подскажите, как настроить ADSL в XP? Ну реально тормозит.',
+      'Нашёл старый скрин с CS 1.6, аж слёзы.',
+      'ICQ была рулёз, познакомились с парнем там.',
+      'Кто играет в Garry\'s Mod? есть сервера?',
+      'Ребят, а вы пробовали темы для Winamp? шикарно!',
+      'Поставил радикальный скин для Opera, смотрится культово.'
     ];
-    function spawnAd(text){ const ad=document.createElement('div'); ad.className='ad'; ad.style.left=(Math.random()*(window.innerWidth-360))+'px'; ad.style.top=(100+Math.random()*400)+'px'; ad.innerHTML = '<button class="close" onclick="this.parentNode.remove()">X</button><div style="font-weight:bold;margin-top:6px">'+text+'</div><div style="margin-top:6px"><button class="btn" onclick="this.parentNode.remove(); alert(\"Вы нажали рекламу\")">Установить</button></div>'; document.body.appendChild(ad); setTimeout(()=>{ if(Math.random()>0.4) spawnAd(adPool[Math.floor(Math.random()*adPool.length)]) }, 3000 + Math.random()*8000); }
-    // kickstart some ads
-    setTimeout(()=>spawnAd(adPool[0]),1200);
-    setTimeout(()=>spawnAd(adPool[1]),3200);
+    for(let i=0;i<30;i++){ shortPosts.push({nick:nickPool[i%nickPool.length],date:'12.05.'+(2003+Math.floor(Math.random()*10))+' 18:'+('0'+Math.floor(Math.random()*59)).slice(-2),text: shortTexts[i%shortTexts.length] + (Math.random()>0.7?' Ржу.':'')}); }
 
-    /* ----------------------- Guestbook & Reviews ----------------------- */
+    const letters = [];
+    const letterTemplates=[
+      'Письмо: Помню, как в 2004 я впервые написал сообщение в ICQ тому самому человеку. Мы переписывались весь вечер, и это было как настоящее свидание через сеть...',
+      'Письмо: Когда я впервые скачал mp3 через eMule, у меня был такой восторг — можно было собирать целые диски! Но скорость и разрывы были кошмаром.',
+      'Письмо: Помню, как меняли обои на рабочем столе, собирали коллекции и делились ими по FTP. Это было наше небольшое творчество.'
+    ];
+    for(let i=0;i<10;i++){ letters.push({nick:nickPool[(i+5)%nickPool.length],date:'0'+(1+Math.floor(Math.random()*28))+'.0'+(1+Math.floor(Math.random()*11))+' 20:'+('0'+Math.floor(Math.random()*59)).slice(-2),text: letterTemplates[i%letterTemplates.length]}); }
+
+    // render articles
+    function renderArticles(){ const area=document.getElementById('articlesArea'); area.innerHTML=''; // main longer posts (we reuse earlier small set + shortPosts)
+      const core = [
+        {id:'a1',title:'Как ускорить интернет в 2004 году',nick:'Dimon_2005',date:'12.05.2007 18:43',views:1243,text:['DNS, отключение служб, прокси — работало для меня. Попробуйте!','В комментариях опишите вашу конфигурацию, помогу.'])},
+        {id:'a2',title:'Обзор кнопочного телефона',nick:'KiberKot',date:'05.09.2008 12:10',views:987,text:['Nokia 3310 — легенда. батарея, змейка и крутая прочность.','Если хотите — опишу как чинить крышку.'])},
+        {id:'a3',title:'Почему Windows XP — лучшая система',nick:'XP_master',date:'22.11.2006 09:02',views:2012,text:['XP стабильна, проста и понятна. После неё начались какие-то эксперименты...']}
+      ];
+      core.forEach(a=>{ const art=document.createElement('div'); art.className='article'; art.innerHTML = '<div style="display:flex"><div class="avatar"></div><div><h3>'+escapeHtml(a.title)+'</h3><div class="meta">Автор: <b>'+escapeHtml(a.nick)+'</b> | '+escapeHtml(a.date)+' | Просмотров: '+a.views+'</div></div></div><div style="margin-top:8px">'+escapeHtml(a.text[0])+' <a href="#" onclick="openArticle(\''+a.id+'\');return false;">читать дальше</a></div>'; area.appendChild(art); });
+      // append short posts
+      const shortBlock=document.createElement('div'); shortBlock.className='box'; shortBlock.innerHTML='<h4>Короткие посты (форумом)</h4>'; shortPosts.forEach(p=>{ const d=document.createElement('div'); d.style.borderTop='1px dashed #ddd'; d.style.padding='6px 0'; d.innerHTML = '<b>'+escapeHtml(p.nick)+'</b> <span style="color:#999;font-size:12px">'+p.date+'</span><div>'+escapeHtml(p.text)+'</div>'; shortBlock.appendChild(d); }); area.appendChild(shortBlock);
+    }
+
+    function openArticle(id){ // simulate opening inline modal
+      const a = [{id:'a1',body:['Полный текст про ускорение интернета...','Детали: DNS, registry tweaks, отключение услуг...']},{id:'a2',body:['Полный обзор про Nokia 3310 и советы по эксплуатации.']},{id:'a3',body:['Полная статья про Windows XP и ностальгические размышления.']}].find(x=>x.id===id);
+      if(!a) return; const modal = createModal('Статья', a.body.map(t=>'<p>'+escapeHtml(t)+'</p>').join('')+'<div style="margin-top:8px"><button class="btn" onclick="this.closest(\'.overlay\').remove()">Закрыть</button></div>'); document.body.appendChild(modal);
+    }
+
+    // letters
+    function renderLetters(){ const area=document.getElementById('lettersArea'); area.innerHTML=''; letters.forEach(l=>{ const d=document.createElement('div'); d.className='article'; d.innerHTML = '<div style="display:flex"><div class="avatar"></div><div><h4>'+escapeHtml(l.nick)+'</h4><div class="meta">'+escapeHtml(l.date)+'</div></div></div><div style="margin-top:8px">'+escapeHtml(l.text)+'</div>'; area.appendChild(d); }); }
+
+    renderArticles(); renderLetters();
+
+    // rating of day (pseudo-dynamic)
+    function renderRating(){ const el=document.getElementById('ratingOfDay'); el.innerHTML = '<ol><li>Как ускорить интернет</li><li>История моего первого компьютера</li><li>Nokia 3310 forever</li></ol>'; }
+    renderRating();
+
+    // ---------------------- guestbook ----------------------
     function renderGuestbook(){ const el=document.getElementById('guestbookEntries'); const arr=JSON.parse(localStorage.getItem('guestbook')||'[]'); el.innerHTML=''; if(arr.length===0) el.innerHTML='<div style="color:#777">Пусто</div>'; arr.slice(-10).reverse().forEach(r=>{ const d=document.createElement('div'); d.style.borderTop='1px dashed #ccc'; d.style.padding='6px 0'; d.innerHTML = '<b>'+escapeHtml(r.name)+'</b> <span style="color:#999;font-size:12px">'+new Date(r.time).toLocaleString()+'</span><div>'+escapeHtml(r.text)+'</div>'; el.appendChild(d); }); }
-    function escapeHtml(s){ return (''+s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-    document.getElementById('gbAdd').addEventListener('click', ()=>{ const n=document.getElementById('gbName').value||'Гость'; const t=document.getElementById('gbText').value||''; if(!t.trim()){ alert('Напишите текст'); return;} const arr=JSON.parse(localStorage.getItem('guestbook')||'[]'); arr.push({name:n,text:t,time:Date.now()}); localStorage.setItem('guestbook', JSON.stringify(arr)); document.getElementById('gbName').value=''; document.getElementById('gbText').value=''; renderGuestbook(); }); renderGuestbook();
+    document.getElementById('gbAdd').addEventListener('click', ()=>{ const n=document.getElementById('gbName').value||'Гость'; const t=document.getElementById('gbText').value||''; const c=document.getElementById('gbCaptcha').value||''; if(parseInt(c)!==5){ alert('Капча неверна (2+3=?).'); return; } if(!t.trim()){ alert('Напишите текст'); return;} const arr=JSON.parse(localStorage.getItem('guestbook')||'[]'); arr.push({name:n,text:t,time:Date.now()}); localStorage.setItem('guestbook', JSON.stringify(arr)); document.getElementById('gbName').value=''; document.getElementById('gbText').value=''; renderGuestbook(); }); renderGuestbook();
 
-    /* ----------------------- Poll ----------------------- */
-    document.getElementById('voteBtn').addEventListener('click', ()=>{
-      const f=document.getElementById('poll'); const v=f.net.value; if(!v) { alert('Выберите вариант'); return;} const key='poll_votes'; const store=JSON.parse(localStorage.getItem(key)||'{}'); store[v]=(store[v]||0)+1; localStorage.setItem(key, JSON.stringify(store)); renderPoll(); });
-    function renderPoll(){ const store=JSON.parse(localStorage.getItem('poll_votes')||'{}'); const total = Object.values(store).reduce((a,b)=>a+b,0); const out=[]; for(const k of ['Dial-Up','ADSL','3G','Не знаю']){ out.push(k+': '+(store[k]||0)); } document.getElementById('pollResult').textContent = out.join(' | ') + ' (Всего: '+total+')'; } renderPoll();
+    // ---------------------- links list ----------------------
+    const links = []; for(let i=0;i<50;i++){ links.push({title:'Ссылка '+(i+1),date:'0'+(1+Math.floor(Math.random()*28))+'.0'+(1+Math.floor(Math.random()*11))}); }
+    function renderLinks(){ const el=document.getElementById('linksList'); el.innerHTML=''; links.forEach(l=>{ const a=document.createElement('div'); a.innerHTML = '<a href="#">'+escapeHtml(l.title)+'</a> <span style="color:#999;font-size:12px">'+escapeHtml(l.date)+'</span>'; el.appendChild(a); }); } renderLinks();
 
-    /* ----------------------- Articles (user style posts) ----------------------- */
-    const articles = [
-      {id:'s1',title:'Как ускорить интернет в 2004 году', nick:'Dimon_2005',date:'12.05.2007 18:43',views:1243,avatar:'#',text:[
-        'Ребята, написал коротко как у меня получилось ускорить ADSL. Сначала поменял DNS на быстрые, потом отключил куча служб в Windows XP, потом использовал маленький прокси. РАБОТАЕТ :)',
-        'Еще рекомендую отключить обновления виндовс во время игр и закрывать какието процессы в Диспетчере.\nВ описании всё просто и понятно.'
-      ]},
-      {id:'s2',title:'Обзор кнопочного телефона', nick:'KiberKot',date:'05.09.2008 12:10',views:987,avatar:'#',text:[
-        'Телефон Nokia 3310 — это НЕУБИВАЕМАЯ вещь. Кнопки удобные, батарея живёт неделю. Для sms и звонков супер.',
-        'Плюс можно играть в змейку вечером. Рекомендую всем, особенно тем кто устал от сенсоров.'
-      ]},
-      {id:'s3',title:'Почему Windows XP — лучшая система', nick:'XP_master',date:'22.11.2006 09:02',views:2012,avatar:'#',text:[
-        'WinXP до сих пор лучшая. Просто стабильна, всё работает. После неё винда стала какой-то странной... вот как-то так.'
-      ]},
-      {id:'s4',title:'Первые впечатления от соцсетей', nick:'Nastya_Online',date:'03.03.2009 20:11',views:543,avatar:'#',text:[
-        'Регистрировалась в новой соцсети — так удобно, но странно. Все выкладывают фотки и комменты быстро.'
-      ]},
-      {id:'s5',title:'Как заработать в интернете без вложений', nick:'GamerPro2008',date:'17.07.2010 14:05',views:888,avatar:'#',text:[
-        'Пару способов: прохождение опросов, тестирование сайтов, фриланс — писать простые тексты. Но нужно время и терпение.'
-      ]},
-      {id:'s6',title:'История моего первого компьютера', nick:'Dimon_2005',date:'01.01.2003 10:00',views:1321,avatar:'#',text:[
-        'Мой первый комп был с процессором 800 MHz и 256 MB RAM. Мы ставили игры, играли по сети — это было круто.'
-      ]}
-    ];
+    // ---------------------- shoutbox ----------------------
+    function renderShoutbox(){ const el=document.getElementById('shoutbox'); const arr=JSON.parse(localStorage.getItem('shouts')||'[]'); el.innerHTML=''; arr.slice(-50).forEach(s=>{ const d=document.createElement('div'); d.innerHTML = '<b>'+escapeHtml(s.nick)+'</b>: '+escapeHtml(s.text); el.appendChild(d); }); el.scrollTop = el.scrollHeight; }
+    document.getElementById('shSend').addEventListener('click', ()=>{ const nick=document.getElementById('shNick').value||'Anon'; const txt=document.getElementById('shMsg').value||''; if(!txt.trim()) return; const arr=JSON.parse(localStorage.getItem('shouts')||'[]'); arr.push({nick,text:txt,time:Date.now()}); localStorage.setItem('shouts', JSON.stringify(arr)); document.getElementById('shMsg').value=''; renderShoutbox(); }); renderShoutbox(); setInterval(()=>{ // fake update every 30s
+      const arr=JSON.parse(localStorage.getItem('shouts')||'[]'); if(Math.random()>0.6) arr.push({nick:nickPool[Math.floor(Math.random()*nickPool.length)],text:'Авто-реп: ржу, кто помнит Winamp?',time:Date.now()}); localStorage.setItem('shouts', JSON.stringify(arr)); renderShoutbox(); },30000);
 
-    function renderArticles(){ const area=document.getElementById('articlesArea'); area.innerHTML=''; articles.forEach(a=>{ const art=document.createElement('div'); art.className='article'; art.innerHTML = '<div style="display:flex"><div class="avatar"></div><div><h3>'+escapeHtml(a.title)+'</h3><div class="meta">Автор: <b>'+escapeHtml(a.nick)+'</b> | '+escapeHtml(a.date)+' | Просмотров: '+a.views+'</div></div></div><div style="margin-top:8px">'+escapeHtml(a.text[0])+' <a href="#" onclick="openArticle(\''+a.id+'\');return false;">читать дальше</a></div>'; area.appendChild(art); }); }
-    function openArticle(id){ const a = articles.find(x=>x.id===id); if(!a) return; const w = window.open('','_blank','width=700,height=600,scrollbars=yes'); const html = '<html><head><title>'+a.title+'</title><style>body{font-family:Tahoma;padding:12px;background:#fff} .avatar{width:100px;height:100px;border:2px solid #000;float:left;margin-right:8px}</style></head><body><h2>'+escapeHtml(a.title)+'</h2><div class="meta">'+escapeHtml(a.nick)+' | '+escapeHtml(a.date)+'</div><div style="margin-top:8px">'+a.text.map(t=>'<p>'+escapeHtml(t)+'</p>').join('')+'</div><hr><h3>Комментарии</h3><div id="commentsHere"></div><script>document.write(\'<p style="color:#666">(Комментарии не сохраняются в новом окне — вернитесь на сайт)</p>\')</'+'script></body></html>'; w.document.write(html); w.document.close(); }
-    renderArticles();
-
-    /* ----------------------- Comments system (in-page sample) ----------------------- */
-    // simple static example under each article can be expanded; for brevity we add a sample for main page
-    const sampleComments = [
-      {nick:'Dimon_2005',text:'Крутая статья, спасибо!',time:'12.05.2007 19:00',replies:[{nick:'KiberKot',text:'+1',time:'12.05.2007 19:10'}]}
-    ];
-
-    // insert sample comments below articles area
-    const commentsDiv = document.createElement('div'); commentsDiv.className='box'; commentsDiv.innerHTML = '<h3>Комментарии</h3>';
-    sampleComments.forEach(c=>{ const d=document.createElement('div'); d.className='comment'; d.innerHTML = '<b>'+c.nick+'</b> <span style="color:#999">'+c.time+'</span><div>'+c.text+'</div><div class="actions">Ответить | Цитировать | Пожаловаться</div>'; if(c.replies) c.replies.forEach(r=>{ const rr=document.createElement('div'); rr.className='comment nested'; rr.innerHTML = '<b>'+r.nick+'</b> <span style="color:#999">'+r.time+'</span><div>'+r.text+'</div>'; d.appendChild(rr); }); commentsDiv.appendChild(d); });
-    document.querySelector('.center .box:last-of-type').after(commentsDiv);
-
-    /* ----------------------- Chat simulation ----------------------- */
+    // ---------------------- Chat simulation ----------------------
     function renderChat(){ const cb=document.getElementById('chatBox'); cb.innerHTML=''; const msgs=JSON.parse(localStorage.getItem('chat_msgs')||'[]'); msgs.slice(-100).forEach(m=>{ const p=document.createElement('div'); p.innerHTML = '<b>'+escapeHtml(m.nick)+'</b>: '+escapeHtml(m.text); cb.appendChild(p); }); cb.scrollTop = cb.scrollHeight; }
     document.getElementById('sendChat').addEventListener('click', ()=>{ const nick=document.getElementById('chatNick').value||'Аноним'; const txt=document.getElementById('chatMsg').value||''; if(!txt.trim()) return; const arr=JSON.parse(localStorage.getItem('chat_msgs')||'[]'); arr.push({nick, text:txt, time:Date.now()}); localStorage.setItem('chat_msgs', JSON.stringify(arr)); document.getElementById('chatMsg').value=''; renderChat(); }); renderChat();
 
-    /* ----------------------- Download button - simulated */
-    document.getElementById('downloadBtn').addEventListener('click', ()=>{ spawnAd('Скачивание началось: файл_retro_pack.zip'); setTimeout(()=>alert('Файл скачан (симуляция).'),1200); });
+    // ---------------------- Download simulation ----------------------
+    document.getElementById('downloadBtn').addEventListener('click', ()=>{ spawnAd('Скачивание началось: retro_pack.zip'); setTimeout(()=>alert('Файл скачан (симуляция).'),1200); });
 
-    /* ----------------------- Add to favorites / homepage (IE-specific) ----------------------- */
-    function addToFavorites(){ try{ window.external.AddFavorite(location.href, document.title); }catch(e){ alert('В вашем браузере нельзя автоматически добавить в избранное. Нажмите Ctrl+D.'); } }
-    function setHomepage(){ alert('Чтобы сделать стартовой, откройте настройки браузера (инструкция для старых IE: drag this to homepage).'); }
+    // ---------------------- Ads: spawn, modal, popunder ----------------------
+    const adPool = ['Вы 999 999 посетитель! Заберите приз!','Скачай бесплатно без регистрации!','Установите новый браузер!','Вам письмо!','Ваш компьютер может быть заражён!'];
+    function spawnAd(text){ if(!retroEnabled) return; const ad=document.createElement('div'); ad.className='ad'; ad.style.left=(Math.random()*(window.innerWidth-360))+'px'; ad.style.top=(100+Math.random()*400)+'px'; ad.innerHTML = '<button class="close" onclick="this.parentNode.remove()">X</button><div style="font-weight:bold;margin-top:6px">'+text+'</div><div style="margin-top:6px"><button class="btn" onclick="this.parentNode.remove(); spawnPopUnder()">Установить</button></div>'; document.body.appendChild(ad); playSound('pop'); setTimeout(()=>{ if(Math.random()>0.5) spawnAd(adPool[Math.floor(Math.random()*adPool.length)]) }, 3000 + Math.random()*8000); }
+    function spawnModal(text){ if(!retroEnabled) return; const overlay=document.createElement('div'); overlay.className='overlay'; overlay.innerHTML = '<div class="modal"><div class="title">Встроенное уведомление сайта</div><div>'+text+'</div><div style="margin-top:8px;text-align:right"><button class="btn" onclick="this.closest(\'.overlay\').remove(); spawnPopUnder();return false;">Играть</button> <button class="btn" onclick="this.closest(\'.overlay\').remove()">Закрыть</button> <button class="btn" onclick="saveToDesktop()">Сохранить на рабочий стол</button></div></div>'; document.body.appendChild(overlay); playSound('modal'); }
+    function spawnPopUnder(){ if(!retroEnabled) return; setTimeout(()=>{ spawnAd('Скачай набор смайлов!'); },500); }
 
-    window.addToFavorites = addToFavorites; window.setHomepage = setHomepage; window.spawnAd = spawnAd; window.openForum = ()=>{ alert('Форум: (симуляция) В будущем можно подключить GitHub Discussions или внешнюю платформу.'); };
+    // kickstart some ads and modal
+    setTimeout(()=>spawnAd(adPool[0]),1200); setTimeout(()=>spawnModal('Проверьте новые стикеры! <br><small>Это встроенное уведомление сайта</small>'),4500);
 
-    /* ----------------------- Random ad spawner loop ----------------------- */
-    setInterval(()=>{ if(Math.random()>0.6) spawnAd(adPool[Math.floor(Math.random()*adPool.length)]); },7000);
+    function saveToDesktop(){ alert('Сохранение на рабочий стол (симуляция).'); }
 
-    /* ----------------------- Closing / cleaning up ----------------------- */
-    // click sound already enabled via global click - playBeep()
+    // clear ads (but keep spawn loop active)
+    document.getElementById('clearAdsBtn').addEventListener('click', clearAds);
+    function clearAds(){ document.querySelectorAll('.ad,.overlay').forEach(n=>n.remove()); playSound('clear'); }
 
-    // Save a fake visitor jackpot event sometimes
-    setInterval(()=>{ if(Math.random()>0.995){ spawnAd('Вы 999 999 посетитель! Заберите приз!'); } },60000);
+    // ---------------------- Title blink and favicon changes ----------------------
+    const titlePool = ['У вас письмо!','Новый гость!','Вернись — тут весело!','RUS Retro Portal']; let titleIdx=0; let titleBlinkTimer;
+    function startTitleBlink(){ titleBlinkTimer = setInterval(()=>{ document.title = titlePool[titleIdx%titlePool.length]; titleIdx++; changeFavicon(titleIdx%2); },4000); }
+    function stopTitleBlink(){ clearInterval(titleBlinkTimer); document.title='RUS Retro Portal'; changeFavicon(0); }
+    function changeFavicon(mode){ const link = document.getElementById('favlink'); if(mode===0) link.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ctext y='14' font-size='14'%3E%F0%9F%8E%8A%3C/text%3E%3C/svg%3E"; else link.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ctext y='14' font-size='14'%3E%E2%9C%8C%3C/text%3E%3C/svg%3E"; }
+    startTitleBlink();
 
-    // Visual rotating 3D banner also clickable
-    document.querySelector('.rot3d').addEventListener('click', ()=>{ spawnAd('ЛУЧШИЙ САЙТ 2007 — получите стикер!'); });
+    // ---------------------- Pseudo-system dialogs and under-construction banner ----------------------
+    function createModal(title, html){ const overlay=document.createElement('div'); overlay.className='overlay'; overlay.innerHTML = '<div class="modal"><div class="title">'+title+'</div><div>'+html+'</div><div style="margin-top:8px;text-align:right"><button class="btn" onclick="this.closest(\'.overlay\').remove();">Закрыть</button></div></div>'; return overlay; }
 
-    /* ----------------------- Misc: play bg on first user interaction if blocked ----------------------- */
-    document.addEventListener('click', function oncePlay(){ tryPlayBgm(); document.removeEventListener('click', oncePlay);});
+    // big under construction
+    const uc = document.createElement('div'); uc.style.padding='12px'; uc.style.background='#fffae6'; uc.style.border='3px dashed #000'; uc.style.margin='10px'; uc.innerHTML = '<b>Under construction</b> <span style="margin-left:8px"><blink>Страница в разработке</blink></span> <img src="" alt="лампа" style="width:20px;height:20px;margin-left:6px">'; document.querySelector('.center .box').prepend(uc);
 
-    /* ----------------------- Snow/stars additional effect already running ----------------------- */
+    // ---------------------- Sound effects ----------------------
+    let audioCtx; function ensureAudio(){ if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)(); }
+    function playSound(type){ try{ ensureAudio(); const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.connect(g); g.connect(audioCtx.destination); if(type==='pop'){ o.frequency.value=880; g.gain.value=0.08;} else if(type==='modal'){ o.frequency.value=660; g.gain.value=0.12;} else if(type==='clear'){ o.frequency.value=440; g.gain.value=0.06;} o.start(); g.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime+0.3); setTimeout(()=>o.stop(),350);}catch(e){} }
 
-    /* ----------------------- Prevent excessive CPU: basic throttles in animations are used */
+    // ---------------------- Music control ----------------------
+    const bgm = document.getElementById('bgm'); document.getElementById('muteMusic').addEventListener('click', ()=>{ if(bgm.paused){ bgm.play().catch(()=>{}); document.getElementById('muteMusic').textContent='Музыка: Вкл'; } else { bgm.pause(); document.getElementById('muteMusic').textContent='Музыка: Выкл'; } });
+
+    // ---------------------- cursor trail ----------------------
+    document.addEventListener('mousemove', e=>{ if(!retroEnabled) return; const d=document.createElement('div'); d.className='trail'; d.style.left=(e.clientX-4)+'px'; d.style.top=(e.clientY-4)+'px'; d.style.background = '#'+Math.floor(Math.random()*16777215).toString(16); d.style.width = Math.random()*10+4+'px'; d.style.height = d.style.width; document.body.appendChild(d); setTimeout(()=>d.remove(),700); });
+
+    // ---------------------- starfall ----------------------
+    function spawnStar(){ if(!retroEnabled) return; const s=document.createElement('div'); s.className='star'; s.style.left=Math.random()*window.innerWidth+'px'; s.style.top='-10px'; s.style.width=(Math.random()*4+2)+'px'; s.style.height=s.style.width; document.body.appendChild(s); const speed = 2+Math.random()*4; let y = -10; const id=setInterval(()=>{ y+=speed; s.style.top = y+'px'; if(y>window.innerHeight+20){ clearInterval(id); s.remove(); } },30); }
+    setInterval(spawnStar,350);
+
+    // ---------------------- page bg color rotation ----------------------
+    setInterval(()=>{ if(!retroEnabled) return; document.querySelector('.page').style.background = 'linear-gradient(90deg,'+randomColor()+','+randomColor()+')'; },10000);
+    function randomColor(){ return '#'+Math.floor(Math.random()*16777215).toString(16); }
+
+    // ---------------------- pop-up on close (beforeunload already set earlier if user wants) ----------------------
+    window.addEventListener('beforeunload', function(e){ if(!retroEnabled) return; e.preventDefault(); e.returnValue = ''; });
+
+    // ---------------------- title blink toggle (retro mode) ----------------------
+    document.getElementById('retroToggle').addEventListener('click', ()=>{ retroEnabled = !retroEnabled; document.getElementById('retroToggle').textContent = 'Ретро-режим: ' + (retroEnabled? 'Вкл' : 'Выкл'); if(!retroEnabled){ stopTitleBlink(); clearAds(); } else { startTitleBlink(); } document.body.classList.toggle('retro-off', !retroEnabled); });
+
+    // ---------------------- add to favorites / homepage helpers ----------------------
+    function addToFavorites(){ try{ window.external.AddFavorite(location.href, document.title); }catch(e){ alert('Ctrl+D — добавить в закладки (или используйте меню браузера)'); } }
+    function setHomepage(){ alert('Чтобы сделать стартовой, откройте настройки браузера. (Старые IE поддерживали автоматическую установку)'); }
+    window.addToFavorites = addToFavorites; window.setHomepage = setHomepage;
+
+    // ---------------------- clear ads on load if desired (keeps spawn) ----------------------
+    function clearAdsOnScreen(){ document.querySelectorAll('.ad,.overlay').forEach(n=>n.remove()); }
+
+    // ---------------------- helper create modal ----------------------
+    function createModal(title, html){ const overlay=document.createElement('div'); overlay.className='overlay'; overlay.innerHTML = '<div class="modal"><div class="title">'+title+'</div><div>'+html+'</div><div style="margin-top:8px;text-align:right"><button class="btn" onclick="this.closest(\'.overlay\').remove();">Закрыть</button></div></div>'; return overlay; }
+
+    // ---------------------- initial small behaviours ----------------------
+    setTimeout(()=>spawnAd(adPool[1]),2000);
+    setInterval(()=>{ if(Math.random()>0.6) spawnAd(adPool[Math.floor(Math.random()*adPool.length)]); },9000);
+
+    // ---------------------- setup favicon blinking and title when a new guestbook entry is added ----------------------
+    let originalTitle = document.title;
+    function flashNewMessage(){ // change title and favicon briefly
+      document.title = 'Новое сообщение!'; changeFavicon(1); setTimeout(()=>{ document.title = originalTitle; changeFavicon(0); },3500); }
+
+    function changeFavicon(mode){ const link = document.getElementById('favlink'); if(mode===0) link.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ctext y='14' font-size='14'%3E%F0%9F%8E%8A%3C/text%3E%3C/svg%3E"; else link.href = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16'%3E%3Ctext y='14' font-size='14'%3E%E2%9C%8C%3C/text%3E%3C/svg%3E"; }
+
+    // ---------------------- small utilities ----------------------
+    function escapeHtml(s){ return (''+s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+    // Exposed functions
+    window.spawnAd = spawnAd; window.clearAds = clearAdsOnScreen; window.saveToDesktop = saveToDesktop; window.createModal = createModal;
+
+    // small initial audio unlock on first interaction
+    document.addEventListener('click', function unlockAudio(){ try{ if(audioCtx && audioCtx.state === 'suspended') audioCtx.resume(); bgm.play().catch(()=>{}); }catch(e){} document.removeEventListener('click', unlockAudio); });
+
+    // ---------------------- Final: small helpers for debugging and toggles ----------------------
+    function stopTitleBlink(){ clearInterval(titleBlinkTimer); document.title = originalTitle; }
+
+    // ensure some final rendering
+    renderArticles(); renderLetters(); renderGuestbook(); renderLinks(); renderRating(); renderShoutbox();
 
   </script>
 </body>
