@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>RUS Retro Portal 2007</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="sidebar">
+    <h3>Отзывы посетителей</h3>
+    <div id="reviews"></div>
+
+    <h4>Добавить отзыв</h4>
+    <input id="nameInput" placeholder="Ваш ник">
+    <textarea id="reviewInput" placeholder="Ваш отзыв"></textarea>
+    <button onclick="addReview()">Отправить</button>
+</div>
+
+<div class="main">
+    <header>
+        <h1>RUS Portal 2007</h1>
+        <div class="tabs">
+            <button onclick="showTab('home')">Главная</button>
+            <button onclick="showTab('articles')">Статьи</button>
+            <button onclick="showTab('about')">О сайте</button>
+        </div>
+    </header>
+
+    <section id="home" class="tab active">
+        <h2>Добро пожаловать!</h2>
+        <p>Лучший портал про игры и интернет-культуру 2000-х.</p>
+    </section>
+
+    <section id="articles" class="tab">
+        <h2>Статьи пользователей</h2>
+        <div id="articlesContainer"></div>
+    </section>
+
+    <section id="about" class="tab">
+        <h2>О проекте</h2>
+        <p>Сайт создан энтузиастами старого интернета. Всё работает на чистом JavaScript.</p>
+    </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
