@@ -1,12 +1,91 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>Redirect</title>
-  <meta http-equiv="refresh" content="0; url=2000.html">
-  <script>location.replace('2000.html');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RUS Retro Portal 2007</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  Перенаправление... <a href="2000.html">Если перенаправление не сработало — нажмите сюда</a>.
+
+<!-- ЛЕВАЯ ВЕРТИКАЛЬНАЯ ПАНЕЛЬ -->
+<div class="sidebar">
+    <h3>Отзывы посетителей</h3>
+    <div id="reviews"></div>
+
+    <h4>Добавить отзыв</h4>
+    <input id="nameInput" placeholder="Ваш ник">
+    <textarea id="reviewInput" placeholder="Ваш отзыв"></textarea>
+    <button onclick="addReview()">Отправить</button>
+
+    <hr>
+    <h4>Случайные отзывы</h4>
+    <p><b>Max_2006:</b> Классный сайт, напоминает старый интернет!</p>
+    <p><b>IvanTF2:</b> Нашёл через форум про TF2 :)</p>
+    <p><b>GhostPlayer:</b> Кто-нибудь ещё замечал странные статьи?</p>
+</div>
+
+<!-- ОСНОВНАЯ ЧАСТЬ -->
+<div class="main">
+
+    <header>
+        <h1>RUS Portal 2007</h1>
+        <div class="tabs">
+            <button onclick="showTab('home')">Главная</button>
+            <button onclick="showTab('articles')">Статьи</button>
+            <button onclick="showTab('about')">О сайте</button>
+        </div>
+    </header>
+
+    <!-- ГЛАВНАЯ -->
+    <section id="home" class="tab active">
+        <h2>Добро пожаловать!</h2>
+        <p>Лучший портал про игры и интернет-культуру 2000-х.</p>
+        <p>Мы пишем про:</p>
+        <ul>
+            <li>Minecraft Alpha версии</li>
+            <li>CS 1.6</li>
+            <li>Garry's Mod</li>
+            <li>Team Fortress 2</li>
+            <li>Старый интернет России</li>
+        </ul>
+
+        <p>Сайт работает на чистом JavaScript. Без CMS. Как в старые времена.</p>
+    </section>
+
+    <!-- СТАТЬИ -->
+    <section id="articles" class="tab">
+        <h2>Статьи пользователей</h2>
+        <div id="articlesContainer">
+            <!-- Сюда загружается articles.json -->
+        </div>
+    </section>
+
+    <!-- О САЙТЕ -->
+    <section id="about" class="tab">
+        <h2>О проекте</h2>
+        <p>Этот сайт создан энтузиастами старого интернета.</p>
+        <p>Мы сохраняем атмосферу форумов 2006–2009 годов.</p>
+        <p>Если вы замечаете странности — возможно, это просто баг.</p>
+        <p>Или нет.</p>
+    </section>
+
+</div>
+
+<!-- XP-style всплывающее окно -->
+<div id="xpPopup" style="display:none;" class="popup">
+    <b>System Message:</b>
+    <p>Он снова зашёл в игру.</p>
+</div>
+
+<script src="script.js"></script>
+
+<script>
+/* дополнительная проверка на случай если script.js не загрузился */
+if (!window.showTab) {
+    console.log("script.js не подключен");
+}
+</script>
+
 </body>
 </html>
